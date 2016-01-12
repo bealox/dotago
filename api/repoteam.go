@@ -1,34 +1,14 @@
 package api
 
 import (
-	"time"
-
+	"github.com/bealox/dotahandler/modal"
 	"github.com/jmoiron/sqlx"
 )
 
-type TeamStruct struct {
-	ID             int       `json:"-"`
-	Name           string    `json:"name"`
-	Tag            string    `json:"tag"`
-	SteamCreatedBy time.Time `json:"created_by"`
-	Logo           uint64    `json:"logo"`
-	FileName       string    `json:"-"`
-	TeamID         uint64    `json:"team_id"`
-	CountryCode    string    `json:"country_code"`
-	URL            string    `json:"-"`
-	Modified       time.Time `json:"modified"`
-	Player0        uint64    `json:"player0"`
-	Player1        uint64    `json:"player1"`
-	Player2        uint64    `json:"player2"`
-	Player3        uint64    `json:"player3"`
-	Player4        uint64    `json:"player4"`
-	Player5        uint64    `json:"substitute"`
-}
-
-func GetTeam() ([]TeamStruct, error) {
+func GetTeam() ([]modal.Modal, error) {
 	var db *sqlx.DB
 	var err error
-	var teams []TeamStruct
+	var teams []modal.Modal
 
 	if db, err = sqlx.Open("mysql", user+":"+password+"@/Dota?parseTime=true"); err != nil {
 		return teams, err
@@ -41,7 +21,7 @@ func GetTeam() ([]TeamStruct, error) {
 	}
 
 	for rows.Next() {
-		var team TeamStruct
+		var team modal.Team
 
 		err = rows.StructScan(&team)
 		if err != nil {

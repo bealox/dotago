@@ -13,9 +13,11 @@ type Routes []Route
 
 var routes = Routes{
 	//Get
-	Route{"Get", "Index", "/", Index},
-	Route{"Get", "HeroIndex", "/heroes", HeroIndex},
-	Route{"Get", "ItemIndex", "/items", ItemIndex},
-	Route{"Get", "AbilityIndex", "/abilities", AbilityIndex},
-	Route{"Get", "TeamIndex", "/teams", TeamIndex},
+	Route{"Get", "Index", "/", index},
+	Route{"Get", "HeroIndex", "/heroes", heroIndex},
+	Route{"Get", "ItemIndex", "/items", itemIndex},
+	Route{"Get", "AbilityIndex", "/abilities", abilityIndex},
+	Route{"Get", "TeamIndex", "/teams", teamIndex},
+	Route{"Get", "LeagueIndex", "/leagues", leagueIndex},
+	Route{"Get", "LiveIndex", "/lives", liveIndex},
 }

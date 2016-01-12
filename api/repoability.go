@@ -1,17 +1,14 @@
 package api
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/bealox/dotahandler/modal"
+	"github.com/jmoiron/sqlx"
+)
 
-type AbilityStruct struct {
-	ID     int    `json:"-"`
-	Name   string `json:"name"`
-	DotaID int    `json:"id"`
-}
-
-func GetAbility() ([]AbilityStruct, error) {
+func GetAbility() ([]modal.Modal, error) {
 	var db *sqlx.DB
 	var err error
-	var abilities []AbilityStruct
+	var abilities []modal.Modal
 
 	if db, err = sqlx.Open("mysql", user+":"+password+"@/Dota?parseTime=true"); err != nil {
 		return abilities, err
@@ -24,7 +21,7 @@ func GetAbility() ([]AbilityStruct, error) {
 	}
 
 	for rows.Next() {
-		var ability AbilityStruct
+		var ability modal.Ability
 
 		err = rows.StructScan(&ability)
 		if err != nil {

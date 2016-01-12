@@ -1,63 +1,61 @@
 package api
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 )
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello, Welcome to Dota API. This site has the best API in the world")
+func index(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "Hello, Welcome to Dota 2 API. This site has the best tournament API in the world!")
 }
 
-func HeroIndex(w http.ResponseWriter, r *http.Request) {
+func heroIndex(w http.ResponseWriter, r *http.Request) {
 	heroes, err := GetHero()
 	if err != nil {
 		log.Println(err)
 	}
-	w.Header().Set("Content-type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(heroes); err != nil {
-		log.Println(err)
-	}
+	processDataToJSON(w, heroes)
 }
 
-func ItemIndex(w http.ResponseWriter, r *http.Request) {
+func itemIndex(w http.ResponseWriter, r *http.Request) {
 	items, err := GetItem()
 	if err != nil {
 		log.Println(err)
 	}
-	w.Header().Set("Content-type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-
-	if err := json.NewEncoder(w).Encode(items); err != nil {
-		log.Println(err)
-	}
+	processDataToJSON(w, items)
 }
 
-func AbilityIndex(w http.ResponseWriter, r *http.Request) {
+func abilityIndex(w http.ResponseWriter, r *http.Request) {
 	abilities, err := GetAbility()
 	if err != nil {
 		log.Println(err)
 	}
-	w.Header().Set("Content-type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-
-	if err := json.NewEncoder(w).Encode(abilities); err != nil {
-		log.Println(err)
-	}
+	processDataToJSON(w, abilities)
 }
 
-func TeamIndex(w http.ResponseWriter, r *http.Request) {
+func teamIndex(w http.ResponseWriter, r *http.Request) {
 	teams, err := GetTeam()
 	if err != nil {
 		log.Println(err)
 	}
-	w.Header().Set("Content-type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
+	processDataToJSON(w, teams)
+}
 
-	if err := json.NewEncoder(w).Encode(teams); err != nil {
+func leagueIndex(w http.ResponseWriter, r *http.Request) {
+	leagues, err := GetLeague()
+	if err != nil {
 		log.Println(err)
 	}
+
+	processDataToJSON(w, leagues)
+}
+
+func liveIndex(w http.ResponseWriter, r *http.Request) {
+
+	live, err := GetLiveMatch()
+	if err != nil {
+		log.Println(err)
+	}
+	processDataToJSON(w, live)
 }

@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	log "github.com/bealox/dotaAPI/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	"github.com/bealox/dotaAPI/api"
+	log "github.com/Sirupsen/logrus"
+	"github.com/bealox/dotago/api"
 )
 
 func main() {
